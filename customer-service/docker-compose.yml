@@ -1,0 +1,19 @@
+version: "3"
+services:
+  mongodbcont:
+    image: mongo:latest
+    container_name: "mongodbcont"
+    restart: always
+    ports:
+      - "27017:27017"
+
+  appcont:
+    image: customer-service:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: "appcont"
+    ports:
+      - "8085:8085"
+    links:
+      - mongodbcont
